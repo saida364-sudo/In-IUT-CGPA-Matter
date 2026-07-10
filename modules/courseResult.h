@@ -14,3 +14,5 @@ CourseResult createCourseResult(Course *course, double marks, int isCompleted);
 void viewCourseResult(CourseResult result);
 
 #endif
+int filterBySemester(CourseResult results[], int n_results, int semester, CourseResult filtered[]);
+int getUniqueSemesters(CourseResult results[], int n_results, int semesters[]);
