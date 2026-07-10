@@ -15,17 +15,33 @@ int main()
 
     for (int i = 0; i < n_courses; i++)
     {
-        double marks;
-        printf("Marks for %s: ", courses[i].name);
-        scanf("%lf", &marks);
-        results[i] = createCourseResult(&courses[i], marks);
+        int isCompleted;
+        double marks = 0.0;
+        
+        printf("Is %s completed? (1 for Yes, 0 for No): ", courses[i].name);
+        scanf("%d", &isCompleted);
+        
+        if (isCompleted)
+        {
+            printf("Marks for %s: ", courses[i].name);
+            scanf("%lf", &marks);
+        }
+        
+        results[i] = createCourseResult(&courses[i], marks, isCompleted);
     }
 
     printf("\n--- Academic Transcript ---\n");
     for (int i = 0; i < n_courses; i++)
     {
         viewCourseResult(results[i]);
-        printf("Grade: %s (GP: %.2f)\n\n", getLetterGrade(results[i]), getGradePoint(results[i]));
+        if (results[i].isCompleted)
+        {
+            printf("Grade: %s (GP: %.2f)\n\n", getLetterGrade(results[i]), getGradePoint(results[i]));
+        }
+        else
+        {
+            printf("Grade: N/A\n\n");
+        }
     }
 
     double finalGPA = calculateGPA(results, n_courses);
