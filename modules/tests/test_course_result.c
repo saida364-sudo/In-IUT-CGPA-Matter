@@ -2,18 +2,40 @@
 #include "course.h"
 #include "courseResult.h"
 
-int testResultCourse()
+int testFilterBySemester()
 {
-    Course course = createCourse("CSE 4202", "Structured Programming II Lab", 1.5);
-    CourseResult result = createCourseResult(&course, 77);
-    return (result.course.credit == course.credit);
+    Course c1 = createCourse("CSE 4107", "Structured Programming I", 3.0, 1);
+    Course c2 = createCourse("CSE 4108", "Structured Programming I Lab", 1.5, 1);
+    Course c3 = createCourse("CSE 4203", "Discrete Mathematics", 3.0, 2);
+
+    CourseResult results[3] = {
+        createCourseResult(&c1, 240, 1),
+        createCourseResult(&c2, 105, 1),
+        createCourseResult(&c3, 210, 1)
+    };
+
+    CourseResult filtered[3];
+    int count = filterBySemester(results, 3, 1, filtered);
+
+    return (count == 2) && (filtered[0].course.semester == 1) && (filtered[1].course.semester == 1);
 }
 
-int testResultMarks()
+int testGetUniqueSemesters()
 {
-    Course course = createCourse("CSE 4202", "Structured Programming II Lab", 1.5);
-    CourseResult result = createCourseResult(&course, 77);
-    return result.marks == 77;
+    Course c1 = createCourse("CSE 4107", "Structured Programming I", 3.0, 1);
+    Course c2 = createCourse("CSE 4108", "Structured Programming I Lab", 1.5, 1);
+    Course c3 = createCourse("CSE 4203", "Discrete Mathematics", 3.0, 2);
+
+    CourseResult results[3] = {
+        createCourseResult(&c1, 240, 1),
+        createCourseResult(&c2, 105, 1),
+        createCourseResult(&c3, 210, 1)
+    };
+
+    int semesters[3];
+    int count = getUniqueSemesters(results, 3, semesters);
+
+    return (count == 2) && (semesters[0] == 1 || semesters[0] == 2);
 }
 
 int main()
@@ -23,10 +45,10 @@ int main()
     int total = 0;
 
     total++;
-    if (testResultCourse()) passed++;
+    if (testFilterBySemester()) passed++;
 
     total++;
-    if (testResultMarks()) passed++;
+    if (testGetUniqueSemesters()) passed++;
 
     printf("Passed %d/%d tests\n", passed, total);
     if (passed == total) return 0;
