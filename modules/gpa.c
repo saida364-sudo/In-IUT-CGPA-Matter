@@ -37,8 +37,11 @@ double calculateGPA(CourseResult results[], int n_results)
     double total_credits = 0.0;
     for (int i = 0; i < n_results; i++)
     {
-        weighted_points += getGradePoint(results[i]) * results[i].course.credit;
-        total_credits += results[i].course.credit;
+        if (results[i].isCompleted)
+        {
+            weighted_points += getGradePoint(results[i]) * results[i].course.credit;
+            total_credits += results[i].course.credit;
+        }
     }
     if (total_credits == 0.0) return 0.0;
     return weighted_points / total_credits;
