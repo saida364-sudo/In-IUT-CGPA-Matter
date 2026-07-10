@@ -7,9 +7,10 @@ typedef struct CourseResult
 {
     Course course;
     double marks;
+    int isCompleted; 
 } CourseResult;
 
-CourseResult createCourseResult(Course *course, double marks);
+CourseResult createCourseResult(Course *course, double marks, int isCompleted);
 void viewCourseResult(CourseResult result);
 
 #endif
