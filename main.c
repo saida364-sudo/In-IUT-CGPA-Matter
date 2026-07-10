@@ -8,10 +8,9 @@ int main()
     Course courses[1000];
     CourseResult results[1000];
     int n_courses = 0;
-
-    courses[n_courses++] = createCourse("CSE 4107", "Structured Programming I", 3.0);
-    courses[n_courses++] = createCourse("CSE 4108", "Structured Programming I Lab", 1.5);
-    courses[n_courses++] = createCourse("CSE 4203", "Discrete Mathematics", 3.0);
+    courses[n_courses++] = createCourse("CSE 4107", "Structured Programming I", 3.0, 1);
+    courses[n_courses++] = createCourse("CSE 4108", "Structured Programming I Lab", 1.5, 1);
+    courses[n_courses++] = createCourse("CSE 4203", "Discrete Mathematics", 3.0, 2);
 
     for (int i = 0; i < n_courses; i++)
     {
@@ -31,22 +30,40 @@ int main()
     }
 
     printf("\n--- Academic Transcript ---\n");
-    for (int i = 0; i < n_courses; i++)
+    
+    int semesters[100];
+    int n_semesters = getUniqueSemesters(results, n_courses, semesters);
+
+    for (int s = 0; s < n_semesters; s++)
     {
-        viewCourseResult(results[i]);
-        if (results[i].isCompleted)
+        int currentSemester = semesters[s];
+        printf("\n=============================\n");
+        printf("Semester %d\n", currentSemester);
+        printf("=============================\n");
+
+        CourseResult filteredResults[1000];
+        int n_filtered = filterBySemester(results, n_courses, currentSemester, filteredResults);
+
+        for (int i = 0; i < n_filtered; i++)
         {
-            printf("Grade: %s (GP: %.2f)\n\n", getLetterGrade(results[i]), getGradePoint(results[i]));
+            viewCourseResult(filteredResults[i]);
+            if (filteredResults[i].isCompleted)
+            {
+                printf("Grade: %s (GP: %.2f)\n\n", getLetterGrade(filteredResults[i]), getGradePoint(filteredResults[i]));
+            }
+            else
+            {
+                printf("Grade: N/A\n\n");
+            }
         }
-        else
-        {
-            printf("Grade: N/A\n\n");
-        }
+
+        double semesterGPA = calculateGPA(filteredResults, n_filtered);
+        printf("Semester %d GPA: %.2f\n", currentSemester, semesterGPA);
     }
 
     double finalGPA = calculateGPA(results, n_courses);
-    printf("---------------------------\n");
-    printf("Calculated CGPA: %.2f\n", finalGPA);
+    printf("\n---------------------------\n");
+    printf("Calculated Overall CGPA: %.2f\n", finalGPA);
     printf("---------------------------\n");
 
     return 0;
