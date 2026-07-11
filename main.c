@@ -1,8 +1,8 @@
+#include "modules/student.h"
+#include "modules/course.h"
 #include <stdio.h>
-#include <string.h>
 #include "course.h"
 #include "courseResult.h"
-#include "student.h"
 #include "gpa.h"
 
 int main()
@@ -87,17 +87,5 @@ CourseResult r1 = createCourseResult(&c1, 85.0, 1);
 addCourseResult(&s1, r1);
 printf("Student: %s (ID: %s)\n", s1.name, s1.id);
 printf("CGPA: %.2f\n", calculateStudentCGPA(s1));
-
-void displayRankedStudents(Student students[], int n) {
-    printf("\n--- Student Ranking (Descending CGPA) ---\n");
-    printf("Rank\tName\t\tCGPA\n");
-    printf("----------------------------------------\n");
-    
-    for (int i = 0; i < n; i++) {
-        // Calculate CGPA once for display
-        float cgpa = calculateStudentCGPA(students[i]);
-        printf("%d\t%s\t\t%.2f\n", i + 1, students[i].name, cgpa);
-    }
-}
     return 0;
 }
