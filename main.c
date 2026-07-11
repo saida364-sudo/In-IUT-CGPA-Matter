@@ -65,6 +65,19 @@ int main()
     printf("\n---------------------------\n");
     printf("Calculated Overall CGPA: %.2f\n", finalGPA);
     printf("---------------------------\n");
+printf("\n--- Expected CGPA Calculator ---\n");
+double currentCGPA, completedCredits, expectedMarks, remainingCredits;
 
+printf("Enter your current CGPA: ");
+scanf("%lf", &currentCGPA);
+printf("Enter your total completed credits: ");
+scanf("%lf", &completedCredits);
+printf("Enter your expected marks for remaining courses (out of 100): ");
+scanf("%lf", &expectedMarks);
+printf("Enter your remaining credits: ");
+scanf("%lf", &remainingCredits);
+
+double expectedCGPA = getExpectedCGPA(currentCGPA, completedCredits, expectedMarks, remainingCredits);
+printf("Based on your input, your expected CGPA will be: %.2f\n", expectedCGPA);
     return 0;
 }

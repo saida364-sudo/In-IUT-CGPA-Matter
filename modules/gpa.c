@@ -46,3 +46,8 @@ double calculateGPA(CourseResult results[], int n_results)
     if (total_credits == 0.0) return 0.0;
     return weighted_points / total_credits;
 }
+double getExpectedCGPA(double currentCGPA, double completedCredits, double expectedMarks, double remainingCredits) {
+    double totalEarnedPoints = currentCGPA * completedCredits;
+    double expectedPoints = (expectedMarks / 100.0) * 4.0 * remainingCredits; // Based on 4.0 scale
+    return (totalEarnedPoints + expectedPoints) / (completedCredits + remainingCredits);
+}
