@@ -3,16 +3,16 @@
 
 #include "course.h"
 
-typedef struct CourseResult
-{
+typedef struct {
     Course course;
     double marks;
     int isCompleted; 
 } CourseResult;
 
-CourseResult createCourseResult(Course *course, double marks, int isCompleted);
+int getUniqueSemesters(CourseResult results[], int n, int semesters[]);
+int filterBySemester(CourseResult results[], int n, int semester, CourseResult filtered[]);
 void viewCourseResult(CourseResult result);
 
+CourseResult createCourseResult(Course *course, double marks, int isCompleted);
+
 #endif
-int filterBySemester(CourseResult results[], int n_results, int semester, CourseResult filtered[]);
-int getUniqueSemesters(CourseResult results[], int n_results, int semesters[]);
