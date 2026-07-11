@@ -10,5 +10,5 @@ extern const char *gradeLetters[];
 double getGradePoint(CourseResult result);
 char *getLetterGrade(CourseResult result);
 double calculateGPA(CourseResult results[], int n_results);
-
+double getExpectedCGPA(double currentCGPA, double completedCredits, double expectedMarks, double remainingCredits);
 #endif
