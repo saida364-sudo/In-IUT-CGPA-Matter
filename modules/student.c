@@ -1,3 +1,4 @@
+#include "gpa.h"
 #include <stdio.h>
 #include <string.h>
 #include "student.h"
@@ -19,7 +20,7 @@ double calculateStudentCGPA(Student student) {
     double totalCredits = 0;
     for (int i = 0; i < student.n_results; i++) {
     
-        totalPoints += getGradePoint(student.results[i].marks) * student.results[i].course.credit;
+       totalPoints += getGradePoint(student.results[i].marks) * student.results[i].course.credit;
         totalCredits += student.results[i].course.credit;
     }
     return (totalCredits == 0) ? 0 : (totalPoints / totalCredits);

@@ -1,3 +1,5 @@
+#include "modules/student.h"
+#include "modules/course.h"
 #include <stdio.h>
 #include "course.h"
 #include "courseResult.h"
@@ -49,7 +51,7 @@ int main()
             viewCourseResult(filteredResults[i]);
             if (filteredResults[i].isCompleted)
             {
-                printf("Grade: %s (GP: %.2f)\n\n", getLetterGrade(filteredResults[i]), getGradePoint(filteredResults[i]));
+                printf("Grade: %s (GP: %.2f)\n\n", getLetterGrade(filteredResults[i]), getGradePoint(filteredResults[i].marks));
             }
             else
             {
@@ -79,5 +81,11 @@ scanf("%lf", &remainingCredits);
 
 double expectedCGPA = getExpectedCGPA(currentCGPA, completedCredits, expectedMarks, remainingCredits);
 printf("Based on your input, your expected CGPA will be: %.2f\n", expectedCGPA);
+Student s1 = createStudent("John Doe", "12345");
+Course c1 = createCourse("CSE 4202", "SP2", 3.0, 4);
+CourseResult r1 = createCourseResult(&c1, 85.0, 1);
+addCourseResult(&s1, r1);
+printf("Student: %s (ID: %s)\n", s1.name, s1.id);
+printf("CGPA: %.2f\n", calculateStudentCGPA(s1));
     return 0;
 }
