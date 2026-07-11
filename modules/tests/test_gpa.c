@@ -50,3 +50,8 @@ int main()
     if (passed == total) return 0;
     return 1;
 }
+int testExpectedCGPA() {
+    
+    double result = getExpectedCGPA(3.5, 30.0, 85.0, 15.0);
+    return (result > 3.7 && result < 3.8); 
+}
