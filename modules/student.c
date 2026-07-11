@@ -1,7 +1,7 @@
-#include "student.h"
 #include "gpa.h"
 #include <stdio.h>
 #include <string.h>
+#include "student.h"
 
 Student createStudent(char name[], char id[]) {
     Student s;
