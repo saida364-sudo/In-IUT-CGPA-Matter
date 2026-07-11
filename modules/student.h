@@ -13,5 +13,5 @@ typedef struct Student {
 Student createStudent(char name[], char id[]);
 void addCourseResult(Student *student, CourseResult result);
 double calculateStudentCGPA(Student student);
-
+void rankStudents(Student students[], int n);
 #endif
