@@ -12,3 +12,4 @@ char *getLetterGrade(CourseResult result);
 double calculateGPA(CourseResult results[], int n_results);
 
 #endif
+double calculateRequiredGPA(double currentGPA, double totalCredits, double targetCGPA, double remainingCredits);
