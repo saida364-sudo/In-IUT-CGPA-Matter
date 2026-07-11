@@ -46,3 +46,8 @@ double calculateGPA(CourseResult results[], int n_results)
     if (total_credits == 0.0) return 0.0;
     return weighted_points / total_credits;
 }
+double calculateRequiredGPA(double currentGPA, double totalCredits, double targetCGPA, double remainingCredits)
+{
+    double requiredPoints = (targetCGPA * (totalCredits + remainingCredits) - (currentGPA * totalCredits)) / remainingCredits;
+    return requiredPoints;
+}
