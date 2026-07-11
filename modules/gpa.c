@@ -11,13 +11,8 @@ double getPercentage(CourseResult result)
     return (result.marks / full_marks) * 100.0;
 }
 
-double getGradePoint(CourseResult result)
-{
-    double percentage = getPercentage(result);
-    for (int i = 0; i < 9; i++)
-    {
-        if (percentage >= gradeBoundaries[i]) return gradePoints[i];
-    }
+double getGradePoint(double marks) {
+    if (marks >= 80) return 4.0;
     return 0.0;
 }
 
@@ -31,20 +26,14 @@ char *getLetterGrade(CourseResult result)
     return "F";
 }
 
-double calculateGPA(CourseResult results[], int n_results)
-{
-    double weighted_points = 0.0;
-    double total_credits = 0.0;
-    for (int i = 0; i < n_results; i++)
-    {
-        if (results[i].isCompleted)
-        {
-            weighted_points += getGradePoint(results[i]) * results[i].course.credit;
-            total_credits += results[i].course.credit;
-        }
+double calculateGPA(CourseResult results[], int n) {
+    double totalPoints = 0;
+    double totalCredits = 0;
+    for (int i = 0; i < n; i++) {
+        totalPoints += getGradePoint(results[i].marks) * results[i].course.credit;
+        totalCredits += results[i].course.credit;
     }
-    if (total_credits == 0.0) return 0.0;
-    return weighted_points / total_credits;
+    return totalPoints / totalCredits;
 }
 double getExpectedCGPA(double currentCGPA, double completedCredits, double expectedMarks, double remainingCredits) {
     double totalEarnedPoints = currentCGPA * completedCredits;
