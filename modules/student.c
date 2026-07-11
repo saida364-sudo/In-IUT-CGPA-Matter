@@ -24,4 +24,17 @@ double calculateStudentCGPA(Student student) {
         totalCredits += student.results[i].course.credit;
     }
     return (totalCredits == 0) ? 0 : (totalPoints / totalCredits);
+    void rankStudents(Student students[], int n)
+     {
+
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (calculateStudentCGPA(students[j]) < calculateStudentCGPA(students[j + 1])) {
+                Student temp = students[j];
+                students[j] = students[j + 1];
+                students[j + 1] = temp;
+            }
+        }
+    }
+}
 }

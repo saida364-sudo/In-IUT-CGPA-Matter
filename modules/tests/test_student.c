@@ -29,5 +29,19 @@ int main() {
 
     printf("Passed %d/%d tests\n", passed, total);
     return (passed == total) ? 0 : 1;
+    void test_rankStudents() {
+    Student students[2] = {
+        {"Student A", 3.0},
+        {"Student B", 3.8}
+    };
+    
+    rankStudents(students, 2);
+    
+    if (students[0].cgpa > students[1].cgpa) {
+        printf("Test Passed: Students ranked correctly.\n");
+    } else {
+        printf("Test Failed: Sorting issue.\n");
+    }
+}
     return 0;
 }
